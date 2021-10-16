@@ -1,5 +1,4 @@
 steps:
-  # build the container image
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
@@ -8,21 +7,19 @@ steps:
         "gcr.io/$PROJECT_ID/github.com/IanVaughan/hello-elixir-cloud-run",
         ".",
       ]
-    # push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "push",
         "gcr.io/$PROJECT_ID/github.com/IanVaughan/hello-elixir-cloud-run",
       ]
-    # Deploy container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
         "beta",
         "run",
         "deploy",
-        "{REPO_NAME}",
+        "hello-elixir-cloud-run",
         "--image",
         "gcr.io/$PROJECT_ID/github.com/IanVaughan/hello-elixir-cloud-run",
         "--region",
